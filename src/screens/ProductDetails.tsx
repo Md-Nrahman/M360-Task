@@ -44,7 +44,6 @@ const ProductDetails: React.FC = () => {
           {product?.description}
         </Descriptions.Item>
         </Descriptions>
-        <p>{product?.description}</p>
       </Col>
     </Row>
   </Card>

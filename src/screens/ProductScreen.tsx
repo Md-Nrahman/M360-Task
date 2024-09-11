@@ -15,8 +15,15 @@ const ProductScreen: React.FC = () => {
     <div style={{ padding: '20px' }}>
       <h1>Products</h1>
       <List
-        grid={{ gutter: 16, column: 4 }}
-        dataSource={data?.products} 
+        grid={{
+          gutter: 16,
+          xs: 1,
+          sm: 2,
+          md: 3,
+          lg: 4,
+          xl: 4
+        }}
+        dataSource={data?.products}
         renderItem={(product) => (
           <List.Item key={product.id}>
             <Link to={`/product/${product.id}`}>
@@ -30,6 +37,7 @@ const ProductScreen: React.FC = () => {
           </List.Item>
         )}
       />
+
     </div>
   );
 };
