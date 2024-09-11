@@ -58,7 +58,16 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
     }
   }, [product, form]);
 
-  if (productLoading || categoriesLoading) return <Spin tip="Loading..." />;
+  if (productLoading || categoriesLoading) return <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh', 
+    }}
+  >
+    <Spin tip="Loading..." />
+  </div>;
   if (productError) return <Alert message="Error" description={String(productError)} type="error" showIcon />;
   if (categoriesError) return <Alert message="Error" description={String(categoriesError)} type="error" showIcon />;
 
@@ -113,7 +122,7 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
                     <Form.Item
                       {...restField}
                       name={[name, 'reviewerName']}
-                      fieldKey={[fieldKey, 'reviewerName']}
+                      fieldKey={[fieldKey, 'reviewerName'] as [string | number, string]}
                       label="Reviewer Name"
                       rules={[{ required: true, message: 'Please input the reviewer name!' }]}
                     >
@@ -124,7 +133,7 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
                     <Form.Item
                       {...restField}
                       name={[name, 'reviewerEmail']}
-                      fieldKey={[fieldKey, 'reviewerEmail']}
+                      fieldKey={[fieldKey, 'reviewerEmail'] as [string | number, string]}
                       label="Reviewer Email"
                       rules={[{ required: true, message: 'Please input the reviewer email!' }]}
                     >
@@ -135,7 +144,7 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
                     <Form.Item
                       {...restField}
                       name={[name, 'comment']}
-                      fieldKey={[fieldKey, 'comment']}
+                      fieldKey={[fieldKey, 'comment'] as [string | number, string]}
                       label="Comment"
                       rules={[{ required: true, message: 'Please input a comment!' }]}
                     >
@@ -146,7 +155,7 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
                     <Form.Item
                       {...restField}
                       name={[name, 'rating']}
-                      fieldKey={[fieldKey, 'rating']}
+                      fieldKey={[fieldKey, 'rating'] as [string | number, string]}
                       label="Rating"
                       rules={[{ required: true, message: 'Please rate the product!' }]}
                     >
@@ -157,7 +166,7 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
                     <Form.Item
                       {...restField}
                       name={[name, 'date']}
-                      fieldKey={[fieldKey, 'date']}
+                      fieldKey={[fieldKey, 'date'] as [string | number, string]}
                       label="Date"
                       rules={[{ required: true, message: 'Please select the review date!' }]}
                     >

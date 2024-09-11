@@ -14,7 +14,16 @@ const ProductDetails: React.FC = () => {
     setIsModalVisible(true);
   };
 
-  if (isLoading) return <Spin tip="Loading..." />;
+  if (isLoading) return <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh', 
+    }}
+  >
+    <Spin tip="Loading..." />
+  </div>;
   if (error) return <Alert message="Error" description={String(error)} type="error" showIcon />;
 
   return (

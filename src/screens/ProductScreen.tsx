@@ -7,7 +7,16 @@ import { List, Card, Spin, Alert } from 'antd';
 const ProductScreen: React.FC = () => {
   const { data, error, isLoading } = useFetchProductsQuery();
 
-  if (isLoading) return <Spin tip="Loading..." />;
+  if (isLoading) return <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh', 
+    }}
+  >
+    <Spin tip="Loading..." />
+  </div>;
 
   if (error) return <Alert message="Error" description={String(error)} type="error" showIcon />;
 
@@ -17,7 +26,7 @@ const ProductScreen: React.FC = () => {
       <List
         grid={{
           gutter: 16,
-          xs: 1,
+          xs: 2,
           sm: 2,
           md: 3,
           lg: 4,
