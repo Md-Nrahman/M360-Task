@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useFetchProductByIdQuery, useFetchCategoriesQuery, useUpdateProductByIdMutation } from '../api/productSlice';
-import { Form, Input, Button, Select, Spin, Alert, Space, Modal, DatePicker, Rate } from 'antd';
+import { Form, Input, Button, Select, Spin, Alert, Space, Modal, DatePicker, Rate, Col, Row } from 'antd';
 import moment from 'moment';
 
 const { Option } = Select;
@@ -32,7 +32,7 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
-    form.resetFields(); 
+    form.resetFields();
   };
 
   const handleFinish = async (values: any) => {
@@ -52,7 +52,7 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
         ...product,
         reviews: product.reviews ? product.reviews.map(review => ({
           ...review,
-          date: moment(review.date), 
+          date: moment(review.date),
         })) : [],
       });
     }
@@ -65,7 +65,7 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
   return (
     <Modal
       title="Update Product"
-      open={true} 
+      open={true}
       onCancel={handleCloseModal}
     >
       <Form
@@ -108,56 +108,68 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
           {(fields, { add, remove }) => (
             <>
               {fields.map(({ key, name, fieldKey, ...restField }) => (
-                <Space key={key} align="baseline" style={{ display: 'flex', marginBottom: 8 }}>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'reviewerName']}
-                    fieldKey={[fieldKey, 'reviewerName'] as [string | number, string]}
-                    label="Reviewer Name"
-                    rules={[{ required: true, message: 'Please input the reviewer name!' }]}
-                  >
-                    <Input />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'reviewerEmail']}
-                    fieldKey={[fieldKey, 'reviewerEmail'] as [string | number, string]}
-                    label="Reviewer Email"
-                    rules={[{ required: true, message: 'Please input the reviewer email!' }]}
-                  >
-                    <Input />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'comment']}
-                    fieldKey={[fieldKey, 'comment'] as [string | number, string]}
-                    label="Comment"
-                    rules={[{ required: true, message: 'Please input a comment!' }]}
-                  >
-                    <Input.TextArea rows={4} />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'rating']}
-                    fieldKey={[fieldKey, 'rating'] as [string | number, string]}
-                    label="Rating"
-                    rules={[{ required: true, message: 'Please rate the product!' }]}
-                  >
-                    <Rate />
-                  </Form.Item>
-                  <Form.Item
-                    {...restField}
-                    name={[name, 'date']}
-                    fieldKey={[fieldKey, 'date'] as [string | number, string]}
-                    label="Date"
-                    rules={[{ required: true, message: 'Please select the review date!' }]}
-                  >
-                    <DatePicker format="YYYY-MM-DD" />
-                  </Form.Item>
-                  <Button type="link" onClick={() => remove(name)} style={{ marginBottom: 24 }}>
-                    Remove
-                  </Button>
-                </Space>
+                <Row key={key} gutter={16} style={{ marginBottom: 8 }}>
+                  <Col xs={24} sm={12} md={6}>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'reviewerName']}
+                      fieldKey={[fieldKey, 'reviewerName']}
+                      label="Reviewer Name"
+                      rules={[{ required: true, message: 'Please input the reviewer name!' }]}
+                    >
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} sm={12} md={6}>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'reviewerEmail']}
+                      fieldKey={[fieldKey, 'reviewerEmail']}
+                      label="Reviewer Email"
+                      rules={[{ required: true, message: 'Please input the reviewer email!' }]}
+                    >
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} sm={12} md={6}>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'comment']}
+                      fieldKey={[fieldKey, 'comment']}
+                      label="Comment"
+                      rules={[{ required: true, message: 'Please input a comment!' }]}
+                    >
+                      <Input.TextArea rows={4} />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} sm={12} md={6}>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'rating']}
+                      fieldKey={[fieldKey, 'rating']}
+                      label="Rating"
+                      rules={[{ required: true, message: 'Please rate the product!' }]}
+                    >
+                      <Rate />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} sm={12} md={6}>
+                    <Form.Item
+                      {...restField}
+                      name={[name, 'date']}
+                      fieldKey={[fieldKey, 'date']}
+                      label="Date"
+                      rules={[{ required: true, message: 'Please select the review date!' }]}
+                    >
+                      <DatePicker format="YYYY-MM-DD" />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} style={{ textAlign: 'center' }}>
+                    <Button type="link" onClick={() => remove(name)} style={{ marginBottom: 24 }}>
+                      Remove
+                    </Button>
+                  </Col>
+                </Row>
               ))}
               <Form.Item>
                 <Button type="dashed" onClick={() => add()} block>
@@ -167,6 +179,7 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
             </>
           )}
         </Form.List>
+
 
         <Form.Item>
           <Button type="primary" htmlType="submit" loading={updateLoading}>
