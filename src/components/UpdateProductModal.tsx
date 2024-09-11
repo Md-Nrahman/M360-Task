@@ -76,6 +76,9 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
       title="Update Product"
       open={true}
       onCancel={handleCloseModal}
+      onOk={() => form.submit()}
+      okText="Submit"
+      confirmLoading={updateLoading}
     >
       <Form
         form={form}
@@ -188,13 +191,6 @@ const UpdateProductModal: React.FC<ProductProps> = ({ setIsModalVisible, id }) =
             </>
           )}
         </Form.List>
-
-
-        <Form.Item>
-          <Button type="primary" htmlType="submit" loading={updateLoading}>
-            Submit
-          </Button>
-        </Form.Item>
       </Form>
     </Modal>
   );
